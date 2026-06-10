@@ -6,6 +6,7 @@ __pycache__/
 models/*.pkl
 data/raw/
 data/Processed
+src/*.ipynb
 
 .env
 .DS_Store
