@@ -14,6 +14,8 @@ def create_preprocesser(df):
     cat_cols=df.select_dtypes(
         include='object'
     ).columns.tolist()
+    if 'Credit_Score' in cat_cols:
+        cat_cols.remove('Credit_Score')
 
     preprocessor=ColumnTransformer(
         transformers=[

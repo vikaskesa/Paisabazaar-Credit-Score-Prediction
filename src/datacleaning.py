@@ -14,10 +14,6 @@ def missing_values(df):
 def remove_duplicates(df):
     return df.drop_duplicates()
 
-def clean_data(df):
-    df=remove_duplicates(df)
-    return df
-
 def drop_unnecessary_cols(df):
     columns_to_drop =[
         "ID",
@@ -30,3 +26,10 @@ def drop_unnecessary_cols(df):
         errors='ignore'
     )
     return df
+
+
+def clean_data(df):
+    df=remove_duplicates(df)
+    df=drop_unnecessary_cols(df)
+    return df
+
