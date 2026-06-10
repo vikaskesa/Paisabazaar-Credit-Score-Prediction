@@ -1,7 +1,7 @@
 from src import datacleaning as dc
 from src import featureEngineering as fe
 from src import preprocessing as p
-
+import pandas as pd
 import joblib
 
 from sklearn.model_selection import train_test_split
@@ -17,7 +17,7 @@ from sklearn.metrics import (
 )
 from pathlib import Path
 def main():
-        path = r"../data/raw/paisabazaar.csv"
+        path = r"data/raw/paisabazaar.csv"
         # Data Cleaning methods
         df=dc.load_data(path)
         df=dc.clean_data(df)
@@ -37,6 +37,8 @@ def main():
         le=LabelEncoder()
         y=le.fit_transform(y)
 
+
+
         X_train,X_test,y_train,y_test = train_test_split(
             X,
             y,
@@ -49,13 +51,9 @@ def main():
         X_train_processed = preprocessor_obj.fit_transform(X_train)
         X_test_processed = preprocessor_obj.transform(X_test)
 
-        rf=RandomForestClassifier(
-            n_estimators=400,
-            max_depth=50,
-            min_samples_split=10,
-            min_samples_leaf=1,
-            bootstrap=True,
-            class_weight='balanced',
+
+        rf=rf = RandomForestClassifier(
+            n_estimators=100,
             random_state=42
         )
 
@@ -68,7 +66,6 @@ def main():
         pred=rf.predict(
             X_test_processed
         )
-
 
 
         # Evaluation Metrics
@@ -114,11 +111,10 @@ def main():
         print("Confusion Matrix")
         print(cm)
 
-        MODEL_DIR=Path("../models")
+        MODEL_DIR=Path("models")
         MODEL_DIR.mkdir(
             exist_ok =True
         )
-
         joblib.dump(
             rf,
             MODEL_DIR/"random_forest.pkl"
