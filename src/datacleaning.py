@@ -18,3 +18,15 @@ def clean_data(df):
     df=remove_duplicates(df)
     return df
 
+def drop_unnecessary_cols(df):
+    columns_to_drop =[
+        "ID",
+        'Customer_ID',
+        'Name',
+        'SSN'
+    ]
+    df=df.drop(
+        columns=columns_to_drop,
+        errors='ignore'
+    )
+    return df
