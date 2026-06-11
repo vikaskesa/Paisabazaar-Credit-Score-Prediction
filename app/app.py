@@ -3,6 +3,11 @@ import pandas as pd
 
 from src.predict import predict_credit_score
 
+
+import sys
+from pathlib import Path
+BASE_DIR=Path(__file__).resolve().parent.parent
+sys.path.append(str(BASE_DIR))
 def format_loans(loans):
     if len(loans)==0:
         return "No Data"
