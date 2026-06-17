@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.predict import predict_credit_score
 
 
