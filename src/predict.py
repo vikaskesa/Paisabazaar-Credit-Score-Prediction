@@ -5,21 +5,36 @@ import pandas as pd
 
 from src import featureEngineering as fe
 
-BASE_DIR=Path(__file__).resolve().parent.parent
+def load_from_drive(file_id,file_name):
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url,file_name,quiet=False)
+    return joblib.load(file_name)
 
-MODEL_DIR=BASE_DIR / "models"
 
-model=joblib.load(
-    MODEL_DIR / "random_forest.pkl"
-)
+MODEL_FILE_ID='1WqPcP93KDoujjKtUuG-A2URpAocayGAz'
+PREPROCESSOR_FILE_ID='1hJQ8HQ0q2B-kx3YP2E19LKtwGEQH1VWS'
+LABEL_ENCODER_FILE_ID = '14bDWABxm-hc37i28ZWPv-XicjOJbzp0Q'
 
-preprocessor=joblib.load(
-    MODEL_DIR/"preprocessor.pkl"
-)
+model=load_from_drive(MODEL_FILE_ID,"random_forest.pkl")
+preprocessor=load_from_drive(PREPROCESSOR_FILE_ID,"preprocessor.pkl")
+label_encoder=load_from_drive(LABEL_ENCODER_FILE_ID,"label_encoder.pkl")
 
-label_encoder=joblib.load(
-    MODEL_DIR / 'label_encoder.pkl'
-)
+
+# BASE_DIR=Path(__file__).resolve().parent.parent
+
+# MODEL_DIR=BASE_DIR / "models"
+
+# model=joblib.load(
+#     MODEL_DIR / "random_forest.pkl"
+# )
+
+# preprocessor=joblib.load(
+#     MODEL_DIR/"preprocessor.pkl"
+# )
+
+# label_encoder=joblib.load(
+#     MODEL_DIR / 'label_encoder.pkl'
+# )
 
 def predict_credit_score(input_df):
 
